@@ -16,8 +16,8 @@ public class TodoReadController extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         System.out.println("/todo/read");
         Long tno = Long.parseLong(req.getParameter("tno"));
-        TodoDTO dto = TodoService.INSTANCE.getDto(tno);
-        req.setAttribute("dto", dto);
+//        TodoDTO dto = TodoService.INSTANCE.getDto(tno);
+//        req.setAttribute("dto", dto);
         req.getRequestDispatcher("/WEB-INF/todo/TodoRead.jsp").forward(req,res);
     }
 }

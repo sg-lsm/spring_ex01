@@ -16,6 +16,4 @@ public class TodoDTO {
     private String title;
     private LocalDate localDate;
     private boolean finished;
-
-
 }

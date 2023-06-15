@@ -7,11 +7,8 @@
     <body>
         <h2>list page</h4>
         <ul>
-            <c:forEach var="dto" items="${list}">
-                <li>${dto.tno}
-                    ${dto.title}
-                    ${dto.localDate}
-                    ${dto.finished}</li>
+            <c:forEach var="dto" items="${dtoList}">
+                <li>${dto}</li>
             </c:forEach>
         </ul>
     </body>
