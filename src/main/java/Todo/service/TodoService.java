@@ -41,5 +41,21 @@ public enum TodoService {
                 .collect(Collectors.toList());
         return dtoList;
     }
+    public TodoDTO getDto(Long tno) throws Exception{
+        log.info("tno : " + tno);
+        TodoVO vo = dao.searchByTno(tno);
+        TodoDTO dto = mapper.map(vo, TodoDTO.class);
+        return dto;
+    }
 
+    public void remove(Long tno) throws Exception{
+        log.info("tno : " + tno);
+        dao.deleteByTno(tno);
+    }
+
+    public void modify(TodoDTO dto) throws Exception{
+        log.info("todoDTO : " + dto);
+        TodoVO vo = mapper.map(dto, TodoVO.class);
+        dao.updateOne(vo);
+    }
 }

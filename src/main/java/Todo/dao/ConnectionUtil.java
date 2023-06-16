@@ -13,9 +13,11 @@ public enum ConnectionUtil {
     ConnectionUtil(){
         HikariConfig config = new HikariConfig();
         config.setDriverClassName("com.mysql.jdbc.Driver");
-        config.setJdbcUrl("jdbc:mysql://localhost/spring5fs");
+        config.setJdbcUrl("jdbc:mysql://localhost/spring5fs?characterEncoding=utf8");
         config.setUsername("spring5");
         config.setPassword("spring5");
+        config.setMaximumPoolSize(10);
+        config.setMinimumIdle(2);
         config.addDataSourceProperty("cachePrepStmts", "true");
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
