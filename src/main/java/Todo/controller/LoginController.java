@@ -1,5 +1,7 @@
 package Todo.controller;
 
+import Todo.dto.MemberDTO;
+import Todo.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
@@ -24,9 +26,16 @@ public class LoginController extends HttpServlet {
         log.info("login... POST");
         String mid = req.getParameter("mid");
         String mpw = req.getParameter("mpw");
-        String str = mid+mpw;
-        HttpSession session = req.getSession();
-        session.setAttribute("loginInfo", str);
-        res.sendRedirect("/todo/list");
+
+        try{
+            MemberDTO memberDTO = MemberService.INSTANCE.login(mid, mpw);
+            HttpSession session = req.getSession();
+            session.setAttribute("loginInfo", memberDTO);
+            res.sendRedirect("/todo/list");
+        }catch (Exception e){
+            // 에러 발생 시 result 파라미터를 전달해서 문제발생을 알리기 위해
+            res.sendRedirect("/login?result=error");
+        }
+
     }
 }

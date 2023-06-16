@@ -6,6 +6,8 @@
     <title>list</title>
     <body>
         <h2>list page</h4>
+        <h3>"${loginInfo}"</h3>
+        <h3>"${loginInfo.mname}"</h3>
         <ul>
             <c:forEach var="dto" items="${dtoList}">
                 <li>
