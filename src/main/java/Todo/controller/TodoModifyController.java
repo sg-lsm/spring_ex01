@@ -4,6 +4,7 @@ import Todo.domain.TodoVO;
 import Todo.dto.TodoDTO;
 import Todo.service.TodoService;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Test;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,6 +44,7 @@ public class TodoModifyController extends HttpServlet {
                 .localDate(LocalDate.parse(req.getParameter("localDate"),dateTimeFormatter))
                 .finished(finishedStr != null && finishedStr.equals("on"))
                 .build();
+        System.out.println(dto);
 
         log.info("/todo/modify POST...");
         log.info(dto);
