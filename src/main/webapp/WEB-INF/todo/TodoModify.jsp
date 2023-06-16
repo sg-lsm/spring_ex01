@@ -1,4 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 
 <head>
@@ -17,7 +19,7 @@
             <input type="date" name="localDate" value="${dto.localDate}" >
         </div>
         <div>
-            <input type="checkbox" name="finished" ${dto.finished ? "checkbox" : "" >
+            <input type="checkbox" name="finished" ${dto.finished ? "checkbox" : ""} >
         </div>
 
         <div>
