@@ -2,6 +2,7 @@ package Todo.listener;
 
 import lombok.extern.log4j.Log4j2;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -15,6 +16,9 @@ public class W2AppListener implements ServletContextListener {
         log.info("----------------init----------------");
         log.info("----------------init----------------");
         log.info("----------------init----------------");
+
+        ServletContext context = servletContextEvent.getServletContext();
+        context.setAttribute("appName", "W2");
     }
 
     @Override

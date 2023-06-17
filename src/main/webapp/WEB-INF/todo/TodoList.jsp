@@ -6,6 +6,7 @@
     <title>list</title>
     <body>
         <h2>list page</h4>
+        <h2>"${appName}"</h2>
         <h3>"${loginInfo}"</h3>
         <h3>"${loginInfo.mname}"</h3>
         <ul>
