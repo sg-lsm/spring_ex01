@@ -9,14 +9,16 @@
     </head>
 
     <body>
-        <c:if test="${param.result == error}">
+        <c:if test="${param.result == 'error'}">
             <h1>로그인 에러</h1>
-        </c>
-
+        </c:if>
+        <h2>${loginInfo}</h2>
+        <h3>${loginInfo.mname}</h3>
 
         <form action="/login" method="post">
             <input type="text" name="mid" />
             <input type="text" name="mpw" />
+            <input type="checkbox" name="auto" />
             <button type="submit">LOGIN</button>
         </form>
     </body>

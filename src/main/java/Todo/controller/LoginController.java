@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet("/login")
 @Log4j2
@@ -26,7 +27,12 @@ public class LoginController extends HttpServlet {
         log.info("login... POST");
         String mid = req.getParameter("mid");
         String mpw = req.getParameter("mpw");
+        String auto = req.getParameter("auto");
 
+        boolean rememberMe = auto != null && auto.equals("on");
+        if(rememberMe){
+            String uuid = UUID.randomUUID().toString();
+        }
         try{
             MemberDTO memberDTO = MemberService.INSTANCE.login(mid, mpw);
             HttpSession session = req.getSession();
@@ -39,3 +45,12 @@ public class LoginController extends HttpServlet {
 
     }
 }
+
+/* 간단하게 검증하는 로그인 && 로그인 체크 구현
+    로그인
+        사용자가 로그인할 때 임의의 문자열을 생성하고 이를 DB에 보관
+        쿠키에는 생성된 문자열을 값으로 삼고 유효기간은 1주일로 설정
+    로그인 체크
+        현재 사용자의 HttpSession에 로그인 정보에 없는 경우에만 쿠키를 확인
+        쿠키의 값과 DB의 값을 비교하고 사용자의 정보를 읽어와 HttpSession에 사용자 정보를 추가
+*/
