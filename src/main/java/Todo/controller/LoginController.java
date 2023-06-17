@@ -6,10 +6,7 @@ import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -30,11 +27,22 @@ public class LoginController extends HttpServlet {
         String auto = req.getParameter("auto");
 
         boolean rememberMe = auto != null && auto.equals("on");
-        if(rememberMe){
-            String uuid = UUID.randomUUID().toString();
-        }
+
         try{
             MemberDTO memberDTO = MemberService.INSTANCE.login(mid, mpw);
+
+            if(rememberMe){
+                String uuid = UUID.randomUUID().toString();
+                MemberService.INSTANCE.updateUuid(mid, uuid);
+                memberDTO.setUuid(uuid);
+
+                Cookie rememberCookie = new Cookie("rememberCookie", uuid);
+                rememberCookie.setMaxAge(60*60*24*7);
+                rememberCookie.setPath("/");
+
+                res.addCookie(rememberCookie);
+            }
+
             HttpSession session = req.getSession();
             session.setAttribute("loginInfo", memberDTO);
             res.sendRedirect("/todo/list");
@@ -42,7 +50,6 @@ public class LoginController extends HttpServlet {
             // 에러 발생 시 result 파라미터를 전달해서 문제발생을 알리기 위해
             res.sendRedirect("/login?result=error");
         }
-
     }
 }
 
